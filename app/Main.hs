@@ -1,9 +1,14 @@
 module Main where
 
-import           Lib   (getEmailUids)
-import           Utils ((|>))
+import           Data.List
+import           Data.Text          (pack)
+import           Lib                (getEmailUids)
+import           System.Environment
+import           Utils              ((|>))
 
 main :: IO ()
 main = do
-  uids <- getEmailUids
+  args <- getArgs
+  let (userLogin:password:inbox:restArgs) = pack <$> args
+  uids <- getEmailUids userLogin password inbox
   uids |> show |> putStrLn
