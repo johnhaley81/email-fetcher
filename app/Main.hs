@@ -1,6 +1,9 @@
 module Main where
 
-import Lib
+import           Lib   (getEmailUids)
+import           Utils ((|>))
 
 main :: IO ()
-main = someFunc
+main = do
+  uids <- getEmailUids
+  uids |> show |> putStrLn
